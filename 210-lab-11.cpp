@@ -51,7 +51,7 @@ int main(){
 void inputPatientData(Patient * p) {
     static int patientNum = 1;
 
-    cout << "Enter the data for patient #" << patientNum << ": \n";
+    cout << "Enter the data for patient #" << patientNum << ":" << endl;
     cout << "Name: ";
     getline(cin, p->name);
     cout <<  "Age: ";
@@ -67,18 +67,21 @@ void inputPatientData(Patient * p) {
             cin >> p->medications[i];
         }
     }
-
-    cout << "Patient #" << patientNum << " intake complete!\n";
+    cout << "Patient #" << patientNum << " intake complete!" << endl;
     patientNum++;
 }
 
 void displayPatientData(Patient * p) {
     static int patientNum = 1;
-    cout << "Patient #" << patientNum << ":";
-    cout << "Name: " << p->name;
-    cout << "Age: " << p->age;
+    cout << "Patient #" << patientNum << ":" << endl;
+    cout << "Name: " << p->name << endl;
+    cout << "Age: " << p->age << endl;
     cout << "Medications: ";
     for (int i = 0; i < p->numMeds; i++) {
-        cout << p->medications[i] << " ";
+        cout << p->medications[i];
+        if (i < p->numMeds - 1)
+            cout << ", ";
     }
+    cout << endl;
+    patientNum++;
 }

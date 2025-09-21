@@ -1,6 +1,9 @@
 // COMSC-210 | Lab 11 | Dainiz Almazan
 // IDE used: CLion
 
+#include <iostream>
+using namespace std;
+
 /*
 Write a program that features a simple dynamic array of structs. The struct definition should itself include a dynamic
 array as well as other member variables.

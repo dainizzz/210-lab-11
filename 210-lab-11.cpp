@@ -4,6 +4,19 @@
 #include <iostream>
 using namespace std;
 
+struct Patient {
+    string name;
+    int age;
+    string * medications;
+
+    ~Patient() {
+        if (medications) {
+            delete [] medications;
+        }
+        medications = nullptr;
+    }
+};
+
 /*
 Write a program that features a simple dynamic array of structs. The struct definition should itself include a dynamic
 array as well as other member variables.

@@ -13,9 +13,8 @@ struct Patient {
     string * medications;
 
     ~Patient() {
-        if (medications) {
+        if (medications)
             delete [] medications;
-        }
         medications = nullptr;
     }
 };
@@ -45,7 +44,7 @@ int main(){
 
 void inputPatientData(Patient * p) {
     static int patientNum = 1;
-    int medNum;
+    int numMeds;
 
     cout << "Enter the data for patient #" << patientNum << ": \n";
     cout << "Name: ";
@@ -53,9 +52,16 @@ void inputPatientData(Patient * p) {
     cout <<  "Age: ";
     cin >> p->age;
     cout << "Enter the number of medications the patient is currently taking: ";
-    cin >> medNum;
-    if (medNum > 0) {
-        p->medications = new string[medNum];
-        cout << "Enter the name of medication #" << medNum << ": ";
+    cin >> numMeds;
+    // If the patient is not currently taking any medications, this should not execute.
+    if (numMeds > 0) {
+        p->medications = new string[numMeds];
+        for (int i = 0; i < numMeds; i++) {
+            cout << "Enter the name of medication #" << i + 1 << ": ";
+            getline(cin, p->medications[i]);
+        }
     }
+
+    cout << "Patient #" << patientNum << " intake complete!\n";
+    patientNum++;
 }

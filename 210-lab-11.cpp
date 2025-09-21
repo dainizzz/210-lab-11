@@ -34,7 +34,28 @@ int main(){
     // This program models patient intake at a hospital.
     Patient * patients = new Patient[NUM_PATIENTS];
 
+    for (int i = 0; i < NUM_PATIENTS; i++) {
+        inputPatientData(&patients[i]);
+    }
+
     delete [] patients;
 
     return 0;
+}
+
+void inputPatientData(Patient * p) {
+    static int patientNum = 1;
+    int medNum;
+
+    cout << "Enter the data for patient #" << patientNum << ": \n";
+    cout << "Name: ";
+    getline(cin, p->name);
+    cout <<  "Age: ";
+    cin >> p->age;
+    cout << "Enter the number of medications the patient is currently taking: ";
+    cin >> medNum;
+    if (medNum > 0) {
+        p->medications = new string[medNum];
+        cout << "Enter the name of medication #" << medNum << ": ";
+    }
 }

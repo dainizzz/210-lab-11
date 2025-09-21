@@ -66,8 +66,12 @@ void inputPatientData(Patient * p) {
             cout << "Enter the name of medication #" << i + 1 << ": ";
             cin >> p->medications[i];
         }
-    }
+    }else
+        p->medications = nullptr;
+
     cout << "Patient #" << patientNum << " intake complete!" << endl;
+    // TODO: Figure out where this should go; currently causing bug if missing but if present then you have to press enter twice before finishing patient data input
+    cin.ignore();
     patientNum++;
 }
 
@@ -77,11 +81,15 @@ void displayPatientData(Patient * p) {
     cout << "Name: " << p->name << endl;
     cout << "Age: " << p->age << endl;
     cout << "Medications: ";
-    for (int i = 0; i < p->numMeds; i++) {
-        cout << p->medications[i];
-        if (i < p->numMeds - 1)
-            cout << ", ";
-    }
+    if (p->numMeds > 0) {
+        for (int i = 0; i < p->numMeds; i++) {
+            cout << p->medications[i];
+            if (i < p->numMeds - 1)
+                cout << ", ";
+        }
+    } else
+        cout << "None";
+
     cout << endl;
     patientNum++;
 }

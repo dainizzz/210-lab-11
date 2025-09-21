@@ -22,7 +22,7 @@ struct Patient {
 
 // inputPatientData()...
 // arguments:
-// returns:
+// returns: nothing
 void inputPatientData(Patient *);
 
 // displayPatientData()...
@@ -60,12 +60,9 @@ void inputPatientData(Patient * p) {
         p->medications = new string[numMeds];
         for (int i = 0; i < numMeds; i++) {
             cout << "Enter the name of medication #" << i + 1 << ": ";
-            getline(cin, p->medications[i]);
+            cin >> p->medications[i];
         }
     }
-
-    // Placing cin.ignore() here to clear the stream before the next time the function gets used
-    cin.ignore();
 
     cout << "Patient #" << patientNum << " intake complete!\n";
     patientNum++;

@@ -2,6 +2,7 @@
 // IDE used: CLion
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 const int NUM_PATIENTS = 2;
@@ -53,6 +54,7 @@ void inputPatientData(Patient * p) {
     cin >> p->age;
     cout << "Enter the number of medications the patient is currently taking: ";
     cin >> numMeds;
+    cin.ignore();
     // If the patient is not currently taking any medications, this should not execute.
     if (numMeds > 0) {
         p->medications = new string[numMeds];
@@ -61,6 +63,9 @@ void inputPatientData(Patient * p) {
             getline(cin, p->medications[i]);
         }
     }
+
+    // Placing cin.ignore() here to clear the stream before the next time the function gets used
+    cin.ignore();
 
     cout << "Patient #" << patientNum << " intake complete!\n";
     patientNum++;

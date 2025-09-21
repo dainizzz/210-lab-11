@@ -11,6 +11,7 @@ const int NUM_PATIENTS = 2;
 struct Patient {
     string name;
     int age;
+    int numMeds;
     string * medications;
 
     ~Patient() {
@@ -20,14 +21,14 @@ struct Patient {
     }
 };
 
-// inputPatientData()...
-// arguments:
+// inputPatientData() prompts the user to enter information about a patient
+// arguments: a pointer to a Patient struct
 // returns: nothing
 void inputPatientData(Patient *);
 
-// displayPatientData()...
-// arguments:
-// returns:
+// displayPatientData() displays a patient's information
+// arguments: a pointer to a Patient struct
+// returns: nothing
 void displayPatientData(Patient *);
 
 int main(){
@@ -38,6 +39,10 @@ int main(){
         inputPatientData(&patients[i]);
     }
 
+    for (int i = 0; i < NUM_PATIENTS; i++) {
+        displayPatientData(&patients[i]);
+    }
+
     delete [] patients;
 
     return 0;
@@ -45,7 +50,6 @@ int main(){
 
 void inputPatientData(Patient * p) {
     static int patientNum = 1;
-    int numMeds;
 
     cout << "Enter the data for patient #" << patientNum << ": \n";
     cout << "Name: ";
@@ -53,12 +57,12 @@ void inputPatientData(Patient * p) {
     cout <<  "Age: ";
     cin >> p->age;
     cout << "Enter the number of medications the patient is currently taking: ";
-    cin >> numMeds;
+    cin >> p->numMeds;
     cin.ignore();
     // If the patient is not currently taking any medications, this should not execute.
-    if (numMeds > 0) {
-        p->medications = new string[numMeds];
-        for (int i = 0; i < numMeds; i++) {
+    if (p->numMeds > 0) {
+        p->medications = new string[p->numMeds];
+        for (int i = 0; i < p->numMeds; i++) {
             cout << "Enter the name of medication #" << i + 1 << ": ";
             cin >> p->medications[i];
         }
@@ -66,4 +70,15 @@ void inputPatientData(Patient * p) {
 
     cout << "Patient #" << patientNum << " intake complete!\n";
     patientNum++;
+}
+
+void displayPatientData(Patient * p) {
+    static int patientNum = 1;
+    cout << "Patient #" << patientNum << ":";
+    cout << "Name: " << p->name;
+    cout << "Age: " << p->age;
+    cout << "Medications: ";
+    for (int i = 0; i < p->numMeds; i++) {
+        cout << p->medications[i] << " ";
+    }
 }

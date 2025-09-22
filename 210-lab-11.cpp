@@ -64,9 +64,10 @@ void inputPatientData(Patient *p) {
 	// If the patient is currently taking medications, a dynamic array will be created to store the list of medications
 	if (p->numMeds > 0) {
 		p->medications = new string[p->numMeds];
+		cin.ignore();
 		for (int i = 0; i < p->numMeds; i++) {
 			cout << "Enter the name of medication #" << i + 1 << ": ";
-			cin >> p->medications[i];
+			getline(cin, p->medications[i]);
 		}
 	// If the patient is not taking any medications, the medications pointer is set to nullptr
 	} else

@@ -9,7 +9,8 @@ const int NUM_PATIENTS = 2;
 
 // This is a basic info about a patient, including a list of medications they're currently taking.
 struct Patient {
-    string name;
+    string firstName;
+    string lastName;
     int age;
     int numMeds;
     string * medications;
@@ -52,8 +53,10 @@ void inputPatientData(Patient * p) {
     static int patientNum = 1;
 
     cout << "Enter the data for patient #" << patientNum << ":" << endl;
-    cout << "Name: ";
-    getline(cin, p->name);
+    cout << "First Name: ";
+    cin >> p->firstName;
+    cout << "Last Name: ";
+    cin >> p->lastName;
     cout <<  "Age: ";
     cin >> p->age;
     cout << "Enter the number of medications the patient is currently taking: ";
@@ -70,7 +73,6 @@ void inputPatientData(Patient * p) {
         p->medications = nullptr;
 
     cout << "Patient #" << patientNum << " intake complete!" << endl;
-    // TODO: Figure out where this should go; currently causing bug if missing but if present then you have to press enter twice before finishing patient data input
     cin.ignore();
     patientNum++;
 }

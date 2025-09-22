@@ -9,17 +9,17 @@ const int NUM_PATIENTS = 2;
 
 // This is a basic info about a patient, including a list of medications they're currently taking.
 struct Patient {
-    string firstName;
-    string lastName;
-    int age;
-    int numMeds;
-    string * medications;
+	string firstName;
+	string lastName;
+	int age;
+	int numMeds;
+	string *medications;
 
-    ~Patient() {
-        if (medications)
-            delete [] medications;
-        medications = nullptr;
-    }
+	~Patient() {
+		if (medications)
+			delete [] medications;
+		medications = nullptr;
+	}
 };
 
 // inputPatientData() prompts the user to enter information about a patient
@@ -32,66 +32,64 @@ void inputPatientData(Patient *);
 // returns: nothing
 void displayPatientData(Patient *);
 
-int main(){
-    // This program models patient intake at a hospital.
-    Patient * patients = new Patient[NUM_PATIENTS];
+// This program models patient intake at a hospital.
+int main() {
+	Patient *patients = new Patient[NUM_PATIENTS];
 
-    for (int i = 0; i < NUM_PATIENTS; i++) {
-        inputPatientData(&patients[i]);
-    }
+	for (int i = 0; i < NUM_PATIENTS; i++) {
+		inputPatientData(&patients[i]);
+	}
 
-    for (int i = 0; i < NUM_PATIENTS; i++) {
-        displayPatientData(&patients[i]);
-    }
+	for (int i = 0; i < NUM_PATIENTS; i++) {
+		displayPatientData(&patients[i]);
+	}
 
-    delete [] patients;
+	delete [] patients;
 
-    return 0;
+	return 0;
 }
 
-void inputPatientData(Patient * p) {
-    static int patientNum = 1;
+void inputPatientData(Patient *p) {
+	static int patientNum = 1;
 
-    cout << "Enter the data for patient #" << patientNum << ":" << endl;
-    cout << "First Name: ";
-    cin >> p->firstName;
-    cout << "Last Name: ";
-    cin >> p->lastName;
-    cout <<  "Age: ";
-    cin >> p->age;
-    cout << "Enter the number of medications the patient is currently taking: ";
-    cin >> p->numMeds;
-    cin.ignore();
-    // If the patient is not currently taking any medications, this should not execute.
-    if (p->numMeds > 0) {
-        p->medications = new string[p->numMeds];
-        for (int i = 0; i < p->numMeds; i++) {
-            cout << "Enter the name of medication #" << i + 1 << ": ";
-            cin >> p->medications[i];
-        }
-    }else
-        p->medications = nullptr;
+	cout << "Enter the data for patient #" << patientNum << ":" << endl;
+	cout << "First Name: ";
+	cin >> p->firstName;
+	cout << "Last Name: ";
+	cin >> p->lastName;
+	cout << "Age: ";
+	cin >> p->age;
+	cout << "Enter the number of medications the patient is currently taking: ";
+	cin >> p->numMeds;
+	// If the patient is not currently taking any medications, this should not execute.
+	if (p->numMeds > 0) {
+		p->medications = new string[p->numMeds];
+		for (int i = 0; i < p->numMeds; i++) {
+			cout << "Enter the name of medication #" << i + 1 << ": ";
+			cin >> p->medications[i];
+		}
+	} else
+		p->medications = nullptr;
 
-    cout << "Patient #" << patientNum << " intake complete!" << endl;
-    cin.ignore();
-    patientNum++;
+	cout << "Patient #" << patientNum << " intake complete!" << endl;
+	patientNum++;
 }
 
-void displayPatientData(Patient * p) {
-    static int patientNum = 1;
-    cout << "Patient #" << patientNum << ":" << endl;
-    cout << "Name: " << p->name << endl;
-    cout << "Age: " << p->age << endl;
-    cout << "Medications: ";
-    if (p->numMeds > 0) {
-        for (int i = 0; i < p->numMeds; i++) {
-            cout << p->medications[i];
-            if (i < p->numMeds - 1)
-                cout << ", ";
-        }
-    } else
-        cout << "None";
+void displayPatientData(Patient *p) {
+	static int patientNum = 1;
+	cout << "Patient #" << patientNum << ":" << endl;
+	cout << "Name: " << p->firstName << " " << p->lastName << endl;
+	cout << "Age: " << p->age << endl;
+	cout << "Medications: ";
+	if (p->numMeds > 0) {
+		for (int i = 0; i < p->numMeds; i++) {
+			cout << p->medications[i];
+			if (i < p->numMeds - 1)
+				cout << ", ";
+		}
+	} else
+		cout << "None";
 
-    cout << endl;
-    patientNum++;
+	cout << endl;
+	patientNum++;
 }

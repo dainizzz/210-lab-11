@@ -61,17 +61,18 @@ void inputPatientData(Patient *p) {
 	cin >> p->age;
 	cout << "Enter the number of medications the patient is currently taking: ";
 	cin >> p->numMeds;
-	// If the patient is not currently taking any medications, this should not execute.
+	// If the patient is currently taking medications, a dynamic array will be created to store the list of medications
 	if (p->numMeds > 0) {
 		p->medications = new string[p->numMeds];
 		for (int i = 0; i < p->numMeds; i++) {
 			cout << "Enter the name of medication #" << i + 1 << ": ";
 			cin >> p->medications[i];
 		}
+	// If the patient is not taking any medications, the medications pointer is set to nullptr
 	} else
 		p->medications = nullptr;
 
-	cout << "Patient #" << patientNum << " intake complete!" << endl;
+	cout << "Patient #" << patientNum << " intake complete!" << endl << endl;
 	patientNum++;
 }
 
@@ -81,6 +82,7 @@ void displayPatientData(Patient *p) {
 	cout << "Name: " << p->firstName << " " << p->lastName << endl;
 	cout << "Age: " << p->age << endl;
 	cout << "Medications: ";
+	// If the patient is taking medications, this will display a comma separated list
 	if (p->numMeds > 0) {
 		for (int i = 0; i < p->numMeds; i++) {
 			cout << p->medications[i];
@@ -90,6 +92,6 @@ void displayPatientData(Patient *p) {
 	} else
 		cout << "None";
 
-	cout << endl;
+	cout << endl << endl;
 	patientNum++;
 }
